@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aom789 - Thai Massage & Spa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #1a1a1a; /* พื้นหลังสีเข้ม สบายตา */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f4ede4; /* สีตัวอักษรโทนอุ่น */
+            --text-muted: #b3b3b3;
+            --accent: #d4a373; /* สีไฮไลท์โทนอบอุ่น */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 0%, #2a2520 0%, #1a1a1a 70%);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-bottom: 100px; /* เผื่อพื้นที่ให้แถบเมนูด้านล่าง */
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header & Profile */
+        .header {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .banner {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #4a5d23, #2d3816); /* โทนสีเขียวธรรมชาติ */
+            /* ใส่ URL ภาพแบนเนอร์ของคุณที่นี่ */
+            /* background-image: url('banner.jpg'); */
+            background-size: cover;
+            background-position: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .profile-container {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-color);
+            background-color: #eaddcf;
+            /* ใส่ URL ภาพโปรไฟล์ของคุณที่นี่ */
+            /* background-image: url('profile.jpg'); */
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin: 0 auto;
+        }
+
+        .shop-name {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Widgets (Time & Date) */
+        .widgets {
+            display: flex;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .widget {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-display {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .date-display {
+            font-size: 16px;
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        .widget i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* Content Sections */
+        .section {
+            display: none;
+            padding: 0 20px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Service Cards */
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:active {
+            transform: scale(0.95);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100px;
+            border-radius: 15px;
+            background-color: rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            /* ใส่ภาพบริการที่นี่ */
+            /* background-image: url('service1.jpg'); background-size: cover; */
+        }
+
+        .card-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.2);
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+
+        /* Tips Section Styles */
+        .tip-card {
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tip-icon {
+            font-size: 30px;
+            color: var(--accent);
+            background: rgba(212, 163, 115, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bottom Navigation (macOS Dock Style) */
+        .dock-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .dock {
+            display: flex;
+            gap: 20px;
+            padding: 10px 25px;
+            border-radius: 30px;
+        }
+
+        .dock-item {
+            color: var(--text-muted);
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dock-item.active {
+            color: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .dock-item .dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .dock-item.active .dot {
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-pop {
+            animation: pop 0.4s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="banner"></div>
+        <div class="profile-container">
+            <div class="profile-pic">💆‍♀️</div>
+            <div class="shop-name">aom789 ✨</div>
+        </div>
+    </div>
+
+    <div class="widgets">
+        <div class="widget glass">
+            <i class="fa-regular fa-clock"></i>
+            <div class="time-display" id="clock">00:00</div>
+        </div>
+        <div class="widget glass">
+            <i class="fa-regular fa-calendar-days"></i>
+            <div class="time-display" id="date-num">00</div>
+            <div class="date-display" id="date-text">เดือน ปี</div>
+        </div>
+    </div>
+
+    <div id="home-section" class="section active">
+        <h2 class="section-title">บริการของเรา 🌿</h2>
+        <div class="service-list">
+            <div class="card glass">
+                <div class="card-img">ใส่รูปภาพ</div>
+                <div class="card-title">นวดแผนไทย</div>
+                <div class="card-info">
+                    <span><i class="fa-regular fa-hourglass-half"></i> 1 ชม.</span>
+                    <span style="color: var(--accent);">฿ 300</span>
+                </div>
+            </div>
+            <div class="card glass">
+                <div class="card-img">ใส่รูปภาพ</div>
+                <div class="card-title">นวดน้ำมันอโรมา</div>
+                <div class="card-info">
+                    <span><i class="fa-regular fa-hourglass-half"></i> 1.5 ชม.</span>
+                    <span style="color: var(--accent);">฿ 599</span>
+                </div>
+            </div>
+            <div class="card glass">
+                <div class="card-img">ใส่รูปภาพ</div>
+                <div class="card-title">นวดคอบ่าไหล่</div>
+                <div class="card-info">
+                    <span><i class="fa-regular fa-hourglass-half"></i> 1 ชม.</span>
+                    <span style="color: var(--accent);">฿ 350</span>
+                </div>
+            </div>
+             <div class="card glass">
+                <div class="card-img">ใส่รูปภาพ</div>
+                <div class="card-title">นวดฝ่าเท้า</div>
+                <div class="card-info">
+                    <span><i class="fa-regular fa-hourglass-half"></i> 1 ชม.</span>
+                    <span style="color: var(--accent);">฿ 250</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tips-section" class="section">
+        <h2 class="section-title">ทริค & ข้อเสนอแนะ 💖</h2>
+        
+        <div class="tip-card glass">
+            <div class="tip-icon"><i class="fa-solid fa-mug-hot"></i></div>
+            <div>
+                <h3>ดื่มน้ำอุ่นหลังนวด</h3>
+                <p style="font-size: 14px; color: var(--text-muted); margin-top: 5px;">ช่วยขับของเสียออกจากร่างกาย และทำให้กล้ามเนื้อผ่อนคลายยิ่งขึ้น</p>
+            </div>
+        </div>
+
+        <div class="tip-card glass">
+            <div class="tip-icon"><i class="fa-solid fa-bed"></i></div>
+            <div>
+                <h3>พักผ่อนให้เพียงพอ</h3>
+                <p style="font-size: 14px; color: var(--text-muted); margin-top: 5px;">หลังจากการนวด ร่างกายต้องการการฟื้นฟู ควรนอนหลับอย่างน้อย 8 ชั่วโมง</p>
+            </div>
+        </div>
+        
+        <div class="tip-card glass">
+            <div class="tip-icon"><i class="fa-solid fa-spa"></i></div>
+            <div>
+                <h3>ความถี่ในการนวด</h3>
+                <p style="font-size: 14px; color: var(--text-muted); margin-top: 5px;">เพื่อสุขภาพที่ดี แนะนำให้นวดคลายกล้ามเนื้อสัปดาห์ละ 1-2 ครั้ง</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dock-container">
+        <div class="dock glass">
+            <div class="dock-item active" onclick="switchTab('home', this)">
+                <i class="fa-solid fa-house"></i>
+                <div class="dot"></div>
+            </div>
+            <div class="dock-item" onclick="switchTab('tips', this)">
+                <i class="fa-solid fa-heart"></i>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันสลับหน้า (Tabs)
+        function switchTab(tabId, element) {
+            // เพิ่ม Animation น่ารักๆ ให้ปุ่มที่โดนกด
+            element.classList.add('animate-pop');
+            setTimeout(() => element.classList.remove('animate-pop'), 400);
+
+            // ลบ active class จากทุกปุ่ม
+            document.querySelectorAll('.dock-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // เพิ่ม active class ให้ปุ่มที่เลือก
+            element.classList.add('active');
+
+            // ซ่อนทุกหน้า
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // แสดงหน้าที่เลือก
+            document.getElementById(tabId + '-section').classList.add('active');
+        }
+
+        // ฟังก์ชันอัปเดตเวลาและวันที่แบบ Real-time
+        function updateDateTime() {
+            const now = new Date();
+            
+            // อัปเดตเวลา (HH:MM)
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}`;
+
+            // อัปเดตวันที่ (ภาษาไทย)
+            const dayNum = now.getDate();
+            const months = [
+                "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+            ];
+            const monthText = months[now.getMonth()];
+            
+            document.getElementById('date-num').innerText = dayNum;
+            document.getElementById('date-text').innerText = `${monthText}`;
+        }
+
+        // เรียกใช้ครั้งแรกและตั้งให้ทำงานทุกๆ 1 วินาที
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
